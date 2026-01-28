@@ -1,6 +1,8 @@
 import express, { Application } from "express";
 
 import cors from 'cors';
+import { auth } from "./lib/auth";
+import { toNodeHandler } from "better-auth/node";
 
 
 const app: Application = express();
@@ -12,15 +14,12 @@ app.use(cors({
 
 app.use(express.json());
 
-// app.all("/api/auth/*splat", toNodeHandler(auth));
+app.get("/", (_req, res) => {
+  res.send("medistore server is running from and this comment is on app.ts file");
+});
 
-// app.use("/posts", postRouter);
-// app.use("/comments", commentRouter);
+app.all("/api/auth/*splat", toNodeHandler(auth));
 
-// app.get("/", (req, res) => {
-//     res.send("Hello, World!");
-// });
-// app.use(notFound)
-// app.use(errorHandler)
+
 
 export default app;
