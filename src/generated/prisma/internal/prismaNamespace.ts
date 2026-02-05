@@ -1380,6 +1380,20 @@ export type EnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
 export type ListEnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderStatus[]'>
     
 
+
+/**
+ * Reference to a field of type 'paymentMethod'
+ */
+export type EnumpaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'paymentMethod'>
+    
+
+
+/**
+ * Reference to a field of type 'paymentMethod[]'
+ */
+export type ListEnumpaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'paymentMethod[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */

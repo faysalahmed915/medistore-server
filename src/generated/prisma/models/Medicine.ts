@@ -256,13 +256,13 @@ export type MedicineGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type MedicineGroupByOutputType = {
   id: string
   name: string
-  description: string
+  description: string | null
   price: number
   manufacturer: string
-  dosageForm: string
+  dosageForm: string | null
   genericName: string | null
   strength: string | null
-  image: string
+  image: string | null
   stock: number
   isAvailable: boolean
   categoryId: string
@@ -298,13 +298,13 @@ export type MedicineWhereInput = {
   NOT?: Prisma.MedicineWhereInput | Prisma.MedicineWhereInput[]
   id?: Prisma.StringFilter<"Medicine"> | string
   name?: Prisma.StringFilter<"Medicine"> | string
-  description?: Prisma.StringFilter<"Medicine"> | string
+  description?: Prisma.StringNullableFilter<"Medicine"> | string | null
   price?: Prisma.FloatFilter<"Medicine"> | number
   manufacturer?: Prisma.StringFilter<"Medicine"> | string
-  dosageForm?: Prisma.StringFilter<"Medicine"> | string
+  dosageForm?: Prisma.StringNullableFilter<"Medicine"> | string | null
   genericName?: Prisma.StringNullableFilter<"Medicine"> | string | null
   strength?: Prisma.StringNullableFilter<"Medicine"> | string | null
-  image?: Prisma.StringFilter<"Medicine"> | string
+  image?: Prisma.StringNullableFilter<"Medicine"> | string | null
   stock?: Prisma.IntFilter<"Medicine"> | number
   isAvailable?: Prisma.BoolFilter<"Medicine"> | boolean
   categoryId?: Prisma.StringFilter<"Medicine"> | string
@@ -321,13 +321,13 @@ export type MedicineWhereInput = {
 export type MedicineOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   price?: Prisma.SortOrder
   manufacturer?: Prisma.SortOrder
-  dosageForm?: Prisma.SortOrder
+  dosageForm?: Prisma.SortOrderInput | Prisma.SortOrder
   genericName?: Prisma.SortOrderInput | Prisma.SortOrder
   strength?: Prisma.SortOrderInput | Prisma.SortOrder
-  image?: Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   stock?: Prisma.SortOrder
   isAvailable?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
@@ -347,13 +347,13 @@ export type MedicineWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.MedicineWhereInput[]
   NOT?: Prisma.MedicineWhereInput | Prisma.MedicineWhereInput[]
   name?: Prisma.StringFilter<"Medicine"> | string
-  description?: Prisma.StringFilter<"Medicine"> | string
+  description?: Prisma.StringNullableFilter<"Medicine"> | string | null
   price?: Prisma.FloatFilter<"Medicine"> | number
   manufacturer?: Prisma.StringFilter<"Medicine"> | string
-  dosageForm?: Prisma.StringFilter<"Medicine"> | string
+  dosageForm?: Prisma.StringNullableFilter<"Medicine"> | string | null
   genericName?: Prisma.StringNullableFilter<"Medicine"> | string | null
   strength?: Prisma.StringNullableFilter<"Medicine"> | string | null
-  image?: Prisma.StringFilter<"Medicine"> | string
+  image?: Prisma.StringNullableFilter<"Medicine"> | string | null
   stock?: Prisma.IntFilter<"Medicine"> | number
   isAvailable?: Prisma.BoolFilter<"Medicine"> | boolean
   categoryId?: Prisma.StringFilter<"Medicine"> | string
@@ -370,13 +370,13 @@ export type MedicineWhereUniqueInput = Prisma.AtLeast<{
 export type MedicineOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   price?: Prisma.SortOrder
   manufacturer?: Prisma.SortOrder
-  dosageForm?: Prisma.SortOrder
+  dosageForm?: Prisma.SortOrderInput | Prisma.SortOrder
   genericName?: Prisma.SortOrderInput | Prisma.SortOrder
   strength?: Prisma.SortOrderInput | Prisma.SortOrder
-  image?: Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   stock?: Prisma.SortOrder
   isAvailable?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
@@ -397,13 +397,13 @@ export type MedicineScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MedicineScalarWhereWithAggregatesInput | Prisma.MedicineScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Medicine"> | string
   name?: Prisma.StringWithAggregatesFilter<"Medicine"> | string
-  description?: Prisma.StringWithAggregatesFilter<"Medicine"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"Medicine"> | string | null
   price?: Prisma.FloatWithAggregatesFilter<"Medicine"> | number
   manufacturer?: Prisma.StringWithAggregatesFilter<"Medicine"> | string
-  dosageForm?: Prisma.StringWithAggregatesFilter<"Medicine"> | string
+  dosageForm?: Prisma.StringNullableWithAggregatesFilter<"Medicine"> | string | null
   genericName?: Prisma.StringNullableWithAggregatesFilter<"Medicine"> | string | null
   strength?: Prisma.StringNullableWithAggregatesFilter<"Medicine"> | string | null
-  image?: Prisma.StringWithAggregatesFilter<"Medicine"> | string
+  image?: Prisma.StringNullableWithAggregatesFilter<"Medicine"> | string | null
   stock?: Prisma.IntWithAggregatesFilter<"Medicine"> | number
   isAvailable?: Prisma.BoolWithAggregatesFilter<"Medicine"> | boolean
   categoryId?: Prisma.StringWithAggregatesFilter<"Medicine"> | string
@@ -416,13 +416,13 @@ export type MedicineScalarWhereWithAggregatesInput = {
 export type MedicineCreateInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   price: number
   manufacturer: string
-  dosageForm: string
+  dosageForm?: string | null
   genericName?: string | null
   strength?: string | null
-  image: string
+  image?: string | null
   stock?: number
   isAvailable?: boolean
   averageRating?: number
@@ -437,13 +437,13 @@ export type MedicineCreateInput = {
 export type MedicineUncheckedCreateInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   price: number
   manufacturer: string
-  dosageForm: string
+  dosageForm?: string | null
   genericName?: string | null
   strength?: string | null
-  image: string
+  image?: string | null
   stock?: number
   isAvailable?: boolean
   categoryId: string
@@ -458,13 +458,13 @@ export type MedicineUncheckedCreateInput = {
 export type MedicineUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
-  dosageForm?: Prisma.StringFieldUpdateOperationsInput | string
+  dosageForm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   strength?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   averageRating?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -479,13 +479,13 @@ export type MedicineUpdateInput = {
 export type MedicineUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
-  dosageForm?: Prisma.StringFieldUpdateOperationsInput | string
+  dosageForm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   strength?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -500,13 +500,13 @@ export type MedicineUncheckedUpdateInput = {
 export type MedicineCreateManyInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   price: number
   manufacturer: string
-  dosageForm: string
+  dosageForm?: string | null
   genericName?: string | null
   strength?: string | null
-  image: string
+  image?: string | null
   stock?: number
   isAvailable?: boolean
   categoryId: string
@@ -519,13 +519,13 @@ export type MedicineCreateManyInput = {
 export type MedicineUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
-  dosageForm?: Prisma.StringFieldUpdateOperationsInput | string
+  dosageForm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   strength?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   averageRating?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -536,13 +536,13 @@ export type MedicineUpdateManyMutationInput = {
 export type MedicineUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
-  dosageForm?: Prisma.StringFieldUpdateOperationsInput | string
+  dosageForm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   strength?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -767,13 +767,13 @@ export type MedicineUpdateOneRequiredWithoutReviewsNestedInput = {
 export type MedicineCreateWithoutSellerInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   price: number
   manufacturer: string
-  dosageForm: string
+  dosageForm?: string | null
   genericName?: string | null
   strength?: string | null
-  image: string
+  image?: string | null
   stock?: number
   isAvailable?: boolean
   averageRating?: number
@@ -787,13 +787,13 @@ export type MedicineCreateWithoutSellerInput = {
 export type MedicineUncheckedCreateWithoutSellerInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   price: number
   manufacturer: string
-  dosageForm: string
+  dosageForm?: string | null
   genericName?: string | null
   strength?: string | null
-  image: string
+  image?: string | null
   stock?: number
   isAvailable?: boolean
   categoryId: string
@@ -836,13 +836,13 @@ export type MedicineScalarWhereInput = {
   NOT?: Prisma.MedicineScalarWhereInput | Prisma.MedicineScalarWhereInput[]
   id?: Prisma.StringFilter<"Medicine"> | string
   name?: Prisma.StringFilter<"Medicine"> | string
-  description?: Prisma.StringFilter<"Medicine"> | string
+  description?: Prisma.StringNullableFilter<"Medicine"> | string | null
   price?: Prisma.FloatFilter<"Medicine"> | number
   manufacturer?: Prisma.StringFilter<"Medicine"> | string
-  dosageForm?: Prisma.StringFilter<"Medicine"> | string
+  dosageForm?: Prisma.StringNullableFilter<"Medicine"> | string | null
   genericName?: Prisma.StringNullableFilter<"Medicine"> | string | null
   strength?: Prisma.StringNullableFilter<"Medicine"> | string | null
-  image?: Prisma.StringFilter<"Medicine"> | string
+  image?: Prisma.StringNullableFilter<"Medicine"> | string | null
   stock?: Prisma.IntFilter<"Medicine"> | number
   isAvailable?: Prisma.BoolFilter<"Medicine"> | boolean
   categoryId?: Prisma.StringFilter<"Medicine"> | string
@@ -855,13 +855,13 @@ export type MedicineScalarWhereInput = {
 export type MedicineCreateWithoutOrderItemsInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   price: number
   manufacturer: string
-  dosageForm: string
+  dosageForm?: string | null
   genericName?: string | null
   strength?: string | null
-  image: string
+  image?: string | null
   stock?: number
   isAvailable?: boolean
   averageRating?: number
@@ -875,13 +875,13 @@ export type MedicineCreateWithoutOrderItemsInput = {
 export type MedicineUncheckedCreateWithoutOrderItemsInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   price: number
   manufacturer: string
-  dosageForm: string
+  dosageForm?: string | null
   genericName?: string | null
   strength?: string | null
-  image: string
+  image?: string | null
   stock?: number
   isAvailable?: boolean
   categoryId: string
@@ -911,13 +911,13 @@ export type MedicineUpdateToOneWithWhereWithoutOrderItemsInput = {
 export type MedicineUpdateWithoutOrderItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
-  dosageForm?: Prisma.StringFieldUpdateOperationsInput | string
+  dosageForm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   strength?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   averageRating?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -931,13 +931,13 @@ export type MedicineUpdateWithoutOrderItemsInput = {
 export type MedicineUncheckedUpdateWithoutOrderItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
-  dosageForm?: Prisma.StringFieldUpdateOperationsInput | string
+  dosageForm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   strength?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -951,13 +951,13 @@ export type MedicineUncheckedUpdateWithoutOrderItemsInput = {
 export type MedicineCreateWithoutCategoryInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   price: number
   manufacturer: string
-  dosageForm: string
+  dosageForm?: string | null
   genericName?: string | null
   strength?: string | null
-  image: string
+  image?: string | null
   stock?: number
   isAvailable?: boolean
   averageRating?: number
@@ -971,13 +971,13 @@ export type MedicineCreateWithoutCategoryInput = {
 export type MedicineUncheckedCreateWithoutCategoryInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   price: number
   manufacturer: string
-  dosageForm: string
+  dosageForm?: string | null
   genericName?: string | null
   strength?: string | null
-  image: string
+  image?: string | null
   stock?: number
   isAvailable?: boolean
   sellerId: string
@@ -1017,13 +1017,13 @@ export type MedicineUpdateManyWithWhereWithoutCategoryInput = {
 export type MedicineCreateWithoutReviewsInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   price: number
   manufacturer: string
-  dosageForm: string
+  dosageForm?: string | null
   genericName?: string | null
   strength?: string | null
-  image: string
+  image?: string | null
   stock?: number
   isAvailable?: boolean
   averageRating?: number
@@ -1037,13 +1037,13 @@ export type MedicineCreateWithoutReviewsInput = {
 export type MedicineUncheckedCreateWithoutReviewsInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   price: number
   manufacturer: string
-  dosageForm: string
+  dosageForm?: string | null
   genericName?: string | null
   strength?: string | null
-  image: string
+  image?: string | null
   stock?: number
   isAvailable?: boolean
   categoryId: string
@@ -1073,13 +1073,13 @@ export type MedicineUpdateToOneWithWhereWithoutReviewsInput = {
 export type MedicineUpdateWithoutReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
-  dosageForm?: Prisma.StringFieldUpdateOperationsInput | string
+  dosageForm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   strength?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   averageRating?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1093,13 +1093,13 @@ export type MedicineUpdateWithoutReviewsInput = {
 export type MedicineUncheckedUpdateWithoutReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
-  dosageForm?: Prisma.StringFieldUpdateOperationsInput | string
+  dosageForm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   strength?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1113,13 +1113,13 @@ export type MedicineUncheckedUpdateWithoutReviewsInput = {
 export type MedicineCreateManySellerInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   price: number
   manufacturer: string
-  dosageForm: string
+  dosageForm?: string | null
   genericName?: string | null
   strength?: string | null
-  image: string
+  image?: string | null
   stock?: number
   isAvailable?: boolean
   categoryId: string
@@ -1131,13 +1131,13 @@ export type MedicineCreateManySellerInput = {
 export type MedicineUpdateWithoutSellerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
-  dosageForm?: Prisma.StringFieldUpdateOperationsInput | string
+  dosageForm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   strength?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   averageRating?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1151,13 +1151,13 @@ export type MedicineUpdateWithoutSellerInput = {
 export type MedicineUncheckedUpdateWithoutSellerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
-  dosageForm?: Prisma.StringFieldUpdateOperationsInput | string
+  dosageForm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   strength?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1171,13 +1171,13 @@ export type MedicineUncheckedUpdateWithoutSellerInput = {
 export type MedicineUncheckedUpdateManyWithoutSellerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
-  dosageForm?: Prisma.StringFieldUpdateOperationsInput | string
+  dosageForm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   strength?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1189,13 +1189,13 @@ export type MedicineUncheckedUpdateManyWithoutSellerInput = {
 export type MedicineCreateManyCategoryInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   price: number
   manufacturer: string
-  dosageForm: string
+  dosageForm?: string | null
   genericName?: string | null
   strength?: string | null
-  image: string
+  image?: string | null
   stock?: number
   isAvailable?: boolean
   sellerId: string
@@ -1207,13 +1207,13 @@ export type MedicineCreateManyCategoryInput = {
 export type MedicineUpdateWithoutCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
-  dosageForm?: Prisma.StringFieldUpdateOperationsInput | string
+  dosageForm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   strength?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   averageRating?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1227,13 +1227,13 @@ export type MedicineUpdateWithoutCategoryInput = {
 export type MedicineUncheckedUpdateWithoutCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
-  dosageForm?: Prisma.StringFieldUpdateOperationsInput | string
+  dosageForm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   strength?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sellerId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1247,13 +1247,13 @@ export type MedicineUncheckedUpdateWithoutCategoryInput = {
 export type MedicineUncheckedUpdateManyWithoutCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
-  dosageForm?: Prisma.StringFieldUpdateOperationsInput | string
+  dosageForm?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   strength?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sellerId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1415,13 +1415,13 @@ export type $MedicinePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
-    description: string
+    description: string | null
     price: number
     manufacturer: string
-    dosageForm: string
+    dosageForm: string | null
     genericName: string | null
     strength: string | null
-    image: string
+    image: string | null
     stock: number
     isAvailable: boolean
     categoryId: string

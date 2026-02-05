@@ -273,16 +273,16 @@ export type OrderItemScalarWhereWithAggregatesInput = {
 
 export type OrderItemCreateInput = {
   id?: string
-  quantity: number
-  unitPrice: number
+  quantity?: number
+  unitPrice?: number
   order: Prisma.OrderCreateNestedOneWithoutItemsInput
   medicine: Prisma.MedicineCreateNestedOneWithoutOrderItemsInput
 }
 
 export type OrderItemUncheckedCreateInput = {
   id?: string
-  quantity: number
-  unitPrice: number
+  quantity?: number
+  unitPrice?: number
   orderId: string
   medicineId: string
 }
@@ -305,8 +305,8 @@ export type OrderItemUncheckedUpdateInput = {
 
 export type OrderItemCreateManyInput = {
   id?: string
-  quantity: number
-  unitPrice: number
+  quantity?: number
+  unitPrice?: number
   orderId: string
   medicineId: string
 }
@@ -455,15 +455,15 @@ export type OrderItemUncheckedUpdateManyWithoutOrderNestedInput = {
 
 export type OrderItemCreateWithoutMedicineInput = {
   id?: string
-  quantity: number
-  unitPrice: number
+  quantity?: number
+  unitPrice?: number
   order: Prisma.OrderCreateNestedOneWithoutItemsInput
 }
 
 export type OrderItemUncheckedCreateWithoutMedicineInput = {
   id?: string
-  quantity: number
-  unitPrice: number
+  quantity?: number
+  unitPrice?: number
   orderId: string
 }
 
@@ -506,15 +506,15 @@ export type OrderItemScalarWhereInput = {
 
 export type OrderItemCreateWithoutOrderInput = {
   id?: string
-  quantity: number
-  unitPrice: number
+  quantity?: number
+  unitPrice?: number
   medicine: Prisma.MedicineCreateNestedOneWithoutOrderItemsInput
 }
 
 export type OrderItemUncheckedCreateWithoutOrderInput = {
   id?: string
-  quantity: number
-  unitPrice: number
+  quantity?: number
+  unitPrice?: number
   medicineId: string
 }
 
@@ -546,8 +546,8 @@ export type OrderItemUpdateManyWithWhereWithoutOrderInput = {
 
 export type OrderItemCreateManyMedicineInput = {
   id?: string
-  quantity: number
-  unitPrice: number
+  quantity?: number
+  unitPrice?: number
   orderId: string
 }
 
@@ -574,8 +574,8 @@ export type OrderItemUncheckedUpdateManyWithoutMedicineInput = {
 
 export type OrderItemCreateManyOrderInput = {
   id?: string
-  quantity: number
-  unitPrice: number
+  quantity?: number
+  unitPrice?: number
   medicineId: string
 }
 

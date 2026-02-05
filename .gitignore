@@ -4,4 +4,4 @@ node_modules
 
 /generated/prisma
 .DS_Store
-/generated/prisma
+src/generated/prisma

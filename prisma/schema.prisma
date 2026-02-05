@@ -87,15 +87,15 @@ model Verification {
 // --- MediStore Business Models ---
 
 model Medicine {
-  id           String  @id @default(cuid())
+  id           String  @id @default(uuid())
   name         String
-  description  String  @db.Text
+  description  String? @db.Text
   price        Float
   manufacturer String
-  dosageForm   String
+  dosageForm   String?
   genericName  String?
   strength     String?
-  image        String
+  image        String?
   stock        Int     @default(0)
   isAvailable  Boolean @default(true)
 
@@ -118,11 +118,11 @@ model Medicine {
 }
 
 model Order {
-  id              String      @id @default(cuid())
-  orderStatus     OrderStatus @default(PLACED)
-  totalAmount     Float
+  id              String        @id @default(uuid())
+  orderStatus     OrderStatus   @default(PLACED)
+  totalAmount     Float         @default(0.0)
   shippingAddress String
-  paymentMethod   String      @default("Cash on Delivery")
+  paymentMethod   paymentMethod @default(COD)
 
   userId String
   user   User        @relation(fields: [userId], references: [id])
@@ -133,9 +133,9 @@ model Order {
 }
 
 model OrderItem {
-  id        String @id @default(cuid())
-  quantity  Int
-  unitPrice Float
+  id        String @id @default(uuid())
+  quantity  Int    @default(1)
+  unitPrice Float  @default(0.0)
 
   // BUG FIX: Added missing orderId and relation to Order
   orderId String
@@ -146,15 +146,15 @@ model OrderItem {
 }
 
 model Category {
-  id          String     @id @default(cuid())
+  id          String     @id @default(uuid())
   name        String     @unique
   description String?    @db.Text
   medicines   Medicine[]
 }
 
 model Review {
-  id        String   @id @default(cuid())
-  rating    Int
+  id        String   @id @default(uuid())
+  rating    Int?
   comment   String?  @db.Text
   createdAt DateTime @default(now())
 
@@ -187,4 +187,9 @@ enum OrderStatus {
   SHIPPED
   DELIVERED
   CANCELLED
+}
+
+enum paymentMethod {
+  COD
+  CARD
 }
