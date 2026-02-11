@@ -14,12 +14,18 @@ const createMedicine = async (data: Omit<Medicine, 'id' | 'createdAt' | 'updated
     return result;
 }
 
+const getAllMedicines = async () => {
+    const allMedicines = await prisma.medicine.findMany();
+    return allMedicines;
+};
+
+
 // const getAllMedicines = async ({
 //     search,
 //     tags,
-//     isFeatured,
-//     status,
-//     authorId,
+//     isAvailable,
+//     // status,
+//     sellerId,
 //     page,
 //     limit,
 //     skip,
@@ -28,9 +34,9 @@ const createMedicine = async (data: Omit<Medicine, 'id' | 'createdAt' | 'updated
 // }: {
 //     search: string | undefined,
 //     tags: string[] | [],
-//     isFeatured: boolean | undefined,
-//     status: PostStatus | undefined,
-//     authorId: string | undefined,
+//     isAvailable: boolean | undefined,
+//     // status: PostStatus | undefined,
+//     sellerId: string | undefined,
 //     page: number,
 //     limit: number,
 //     skip: number,
@@ -39,57 +45,57 @@ const createMedicine = async (data: Omit<Medicine, 'id' | 'createdAt' | 'updated
 // }) => {
 //     const andConditions: MedicineWhereInput[] = []
 
-//     if (search) {
+//     // if (search) {
+//     //     andConditions.push({
+//     //         OR: [
+//     //             {
+//     //                 title: {
+//     //                     contains: search,
+//     //                     mode: "insensitive"
+//     //                 }
+//     //             },
+//     //             {
+//     //                 content: {
+//     //                     contains: search,
+//     //                     mode: "insensitive"
+//     //                 }
+//     //             },
+//     //             {
+//     //                 tags: {
+//     //                     has: search
+//     //                 }
+//     //             }
+//     //         ]
+//     //     })
+//     // }
+
+//     // if (tags.length > 0) {
+//     //     andConditions.push({
+//     //         tags: {
+//     //             hasEvery: tags as string[]
+//     //         }
+//     //     })
+//     // }
+
+//     if (typeof isAvailable === 'boolean') {
 //         andConditions.push({
-//             OR: [
-//                 {
-//                     title: {
-//                         contains: search,
-//                         mode: "insensitive"
-//                     }
-//                 },
-//                 {
-//                     content: {
-//                         contains: search,
-//                         mode: "insensitive"
-//                     }
-//                 },
-//                 {
-//                     tags: {
-//                         has: search
-//                     }
-//                 }
-//             ]
+//             isAvailable
 //         })
 //     }
 
-//     if (tags.length > 0) {
+//     // if (status) {
+//     //     andConditions.push({
+//     //         status
+//     //     })
+//     // }
+
+//     if (sellerId) {
 //         andConditions.push({
-//             tags: {
-//                 hasEvery: tags as string[]
-//             }
+//             sellerId
 //         })
 //     }
 
-//     if (typeof isFeatured === 'boolean') {
-//         andConditions.push({
-//             isFeatured
-//         })
-//     }
-
-//     if (status) {
-//         andConditions.push({
-//             status
-//         })
-//     }
-
-//     if (authorId) {
-//         andConditions.push({
-//             authorId
-//         })
-//     }
-
-//     const allPost = await prisma.post.findMany({
+//     const allMedicine = await prisma.medicine.findMany({
 //         take: limit,
 //         skip,
 //         where: {
@@ -105,13 +111,13 @@ const createMedicine = async (data: Omit<Medicine, 'id' | 'createdAt' | 'updated
 //         }
 //     });
 
-//     const total = await prisma.post.count({
+//     const total = await prisma.medicine.count({
 //         where: {
 //             AND: andConditions
 //         }
 //     })
 //     return {
-//         data: allPost,
+//         data: allMedicine,
 //         pagination: {
 //             total,
 //             page,
@@ -310,6 +316,7 @@ const createMedicine = async (data: Omit<Medicine, 'id' | 'createdAt' | 'updated
 
 export const MedicineService = {
     createMedicine,
+    getAllMedicines,
     // getAllPost,
     // getPostById,
     // getMyPosts,

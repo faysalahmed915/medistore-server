@@ -5,6 +5,8 @@ import { auth } from "./lib/auth";
 import { toNodeHandler } from "better-auth/node";
 import { notFound } from "./middlewares/notFound";
 import errorHandler from "./middlewares/globalErrorHandler";
+import { medicineRouter } from "./modules/medicines/medicine.router";
+import { categoryRouter } from "./modules/medicines/categories/category.router";
 
 
 const app: Application = express();
@@ -23,7 +25,8 @@ app.get("/", (_req, res) => {
 app.all("/api/auth/*splat", toNodeHandler(auth));
 
 
-app.use("/medicines",)
+app.use("/api", medicineRouter)
+app.use("/api", categoryRouter)
 
 app.use(notFound)
 app.use(errorHandler)

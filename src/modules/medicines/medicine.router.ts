@@ -5,10 +5,10 @@ import { MedicineController } from './medicine.controller';
 
 const router = express.Router();
 
-// router.get(
-//     "/",
-//     MedicineController.getAllMedicines
-// )
+router.get(
+    "/medicines",
+    MedicineController.getAllMedicines
+)
 // router.get(
 //     "/stats",
 //     auth(UserRole.ADMIN),
@@ -27,8 +27,8 @@ const router = express.Router();
 // )
 
 router.post(
-    "/",
-    auth(UserRole.USER, UserRole.ADMIN),
+    "/seller/medicine",
+    auth(UserRole.SELLER, UserRole.ADMIN),
     MedicineController.createMedicine
 )
 
@@ -44,4 +44,4 @@ router.post(
 //     PostController.deletePost
 // )
 
-export const postRouter: Router = router;
+export const medicineRouter: Router = router;

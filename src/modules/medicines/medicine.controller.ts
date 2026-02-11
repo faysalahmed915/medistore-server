@@ -18,6 +18,17 @@ const createMedicine = async (req: Request, res: Response, next: NextFunction) =
     }
 }
 
+const getAllMedicines = async (req: Request, res: Response) => {
+    try {
+        const result = await MedicineService.getAllMedicines();
+        res.status(200).json(result); 
+    } catch (e) {
+        res.status(400).json({
+            error: "Failed to fetch medicines",
+            details: e
+        })
+    }}
+
 
 // const getAllPost = async (req: Request, res: Response) => {
 //     try {
@@ -137,6 +148,7 @@ const createMedicine = async (req: Request, res: Response, next: NextFunction) =
 
 export const MedicineController = {
     createMedicine,
+    getAllMedicines,
     // getAllPost,
     // getPostById,
     // getMyPosts,

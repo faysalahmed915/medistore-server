@@ -28,9 +28,10 @@ model User {
   phone  String?
   status UserStatus @default(ACTIVE)
 
-  medicines Medicine[] @relation("SellerMedicines")
-  orders    Order[]
-  reviews   Review[]
+  medicines  Medicine[] @relation("SellerMedicines")
+  // categories Category[] @relation("AddedCategories")
+  orders     Order[]
+  reviews    Review[]
 
   @@unique([email])
   @@map("user")
@@ -98,9 +99,10 @@ model Medicine {
   image        String?
   stock        Int     @default(0)
   isAvailable  Boolean @default(true)
+  category     String
 
-  categoryId String
-  category   Category @relation(fields: [categoryId], references: [id])
+  // categoryId String
+  // category   Category @relation(fields: [categoryId], references: [id])
 
   sellerId String
   seller   User   @relation("SellerMedicines", fields: [sellerId], references: [id])
@@ -145,12 +147,16 @@ model OrderItem {
   medicine   Medicine @relation(fields: [medicineId], references: [id])
 }
 
-model Category {
-  id          String     @id @default(uuid())
-  name        String     @unique
-  description String?    @db.Text
-  medicines   Medicine[]
-}
+// model Category {
+//   id          String  @id @default(uuid())
+//   name        String  @unique
+//   description String? @db.Text
+
+//   addedById String?
+//   addedBy   User?   @relation("AddedCategories", fields: [addedById], references: [id])
+
+//   medicines Medicine[]
+// }
 
 model Review {
   id        String   @id @default(uuid())
