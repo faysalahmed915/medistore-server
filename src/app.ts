@@ -7,6 +7,7 @@ import { notFound } from "./middlewares/notFound";
 import errorHandler from "./middlewares/globalErrorHandler";
 import { medicineRouter } from "./modules/medicines/medicine.router";
 import { categoryRouter } from "./modules/medicines/categories/category.router";
+import { CartRouter } from "./modules/cart/cart.routes";
 
 
 const app: Application = express();
@@ -27,6 +28,7 @@ app.all("/api/auth/*splat", toNodeHandler(auth));
 
 app.use("/api", medicineRouter)
 app.use("/api", categoryRouter)
+app.use("/api", CartRouter)
 
 app.use(notFound)
 app.use(errorHandler)
