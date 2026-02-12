@@ -32,6 +32,8 @@ model User {
   // categories Category[] @relation("AddedCategories")
   orders     Order[]
   reviews    Review[]
+  cart       Cart[]
+
 
   @@unique([email])
   @@map("user")
@@ -110,6 +112,7 @@ model Medicine {
   reviews    Review[]
   // BUG FIX: Explicitly added OrderItem relation
   orderItems OrderItem[]
+  cartItems  CartItem[]
 
   averageRating Float    @default(0.0)
   createdAt     DateTime @default(now())
@@ -172,6 +175,43 @@ model Review {
 
   @@unique([userId, medicineId])
 }
+
+// --- Cart Models ---
+model Cart {
+  id        String     @id @default(uuid())
+  userId    String     @unique 
+  user      User       @relation(fields: [userId], references: [id])
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@map("cart")
+}
+
+model CartItem {
+  id         String   @id @default(uuid())
+  cartId     String
+  cart       Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  medicineId String
+  medicine   Medicine @relation(fields: [medicineId], references: [id])
+  quantity   Int      @default(1)
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([cartId, medicineId])
+  @@map("cart_item")
+}
+
+
+
+
+
+
+
+
+
+
 
 // --- Enums ---
 
