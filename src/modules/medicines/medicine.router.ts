@@ -6,6 +6,11 @@ import { MedicineController } from './medicine.controller';
 const router = express.Router();
 
 router.get(
+    "/medicines/:id",
+    MedicineController.getMedicineById
+)
+
+router.get(
     "/medicines",
     MedicineController.getAllMedicines
 )

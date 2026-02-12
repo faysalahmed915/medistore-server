@@ -124,113 +124,20 @@ const createMedicine = async (data: Omit<Medicine, 'id' | 'createdAt' | 'updated
     return result;
 }
 
+const getMedicineById = async (id: string) => {
+    const result = await prisma.medicine.findUnique({
+        where: {
+            id,
+        },
+    });
 
+    // যদি ডাটা না পাওয়া যায় তবে একটি পরিষ্কার এরর থ্রো করা ভালো
+    if (!result) {
+        throw new Error("Medicine not found with this ID");
+    }
 
-// const getAllMedicines = async ({
-//     search,    
-//     isAvailable,
-//     // status,
-//     // sellerId,
-//     page,
-//     limit,
-//     skip,
-//     sortBy,
-//     sortOrder
-// }: {
-//     search: string | undefined,
-//     isAvailable: boolean | undefined,
-//     // status: PostStatus | undefined,
-//     // sellerId: string | undefined,
-//     page: number,
-//     limit: number,
-//     skip: number,
-//     sortBy: string,
-//     sortOrder: string
-// }) => {
-//     const andConditions: MedicineWhereInput[] = []
-
-//     // if (search) {
-//     //     andConditions.push({
-//     //         OR: [
-//     //             {
-//     //                 title: {
-//     //                     contains: search,
-//     //                     mode: "insensitive"
-//     //                 }
-//     //             },
-//     //             {
-//     //                 content: {
-//     //                     contains: search,
-//     //                     mode: "insensitive"
-//     //                 }
-//     //             },
-//     //             {
-//     //                 tags: {
-//     //                     has: search
-//     //                 }
-//     //             }
-//     //         ]
-//     //     })
-//     // }
-
-//     // if (tags.length > 0) {
-//     //     andConditions.push({
-//     //         tags: {
-//     //             hasEvery: tags as string[]
-//     //         }
-//     //     })
-//     // }
-
-//     if (typeof isAvailable === 'boolean') {
-//         andConditions.push({
-//             isAvailable
-//         })
-//     }
-
-//     // if (status) {
-//     //     andConditions.push({
-//     //         status
-//     //     })
-//     // }
-
-//     // if (sellerId) {
-//     //     andConditions.push({
-//     //         sellerId
-//     //     })
-//     // }
-
-//     const allMedicine = await prisma.medicine.findMany({
-//         take: limit,
-//         skip,
-//         where: {
-//             AND: andConditions
-//         },
-//         orderBy: {
-//             [sortBy]: sortOrder
-//         },
-//         // include: {
-//         //     _count: {
-//         //         select: { comments: true }
-//         //     }
-//         // }
-//     });
-
-//     const total = await prisma.medicine.count({
-//         where: {
-//             AND: andConditions
-//         }
-//     })
-//     return {
-//         data: allMedicine,
-//         pagination: {
-//             total,
-//             page,
-//             limit,
-//             totalPages: Math.ceil(total / limit)
-//         }
-//     };
-// }
-
+    return result;
+};
 // const getMedicineById = async (medicineId: string) => {
 //     return await prisma.$transaction(async (tx) => {
 //         await tx.medicine.update({
@@ -421,6 +328,7 @@ const createMedicine = async (data: Omit<Medicine, 'id' | 'createdAt' | 'updated
 export const MedicineService = {
     createMedicine,
     getAllMedicines,
+    getMedicineById,
     // getAllPost,
     // getPostById,
     // getMyPosts,

@@ -56,89 +56,21 @@ const getAllMedicines = async (req: Request, res: Response, next: NextFunction) 
     }
 };
 
-// const getAllMedicines = async (req: Request, res: Response) => {
-//     try {
-//         const { search } = req.query;
-//          const searchString = typeof search === 'string' ? search : undefined;
 
 
-//          // true or false
-//         const isAvailable = req.query.isAvailable
-//             ? req.query.isAvailable === 'true'
-//                 ? true
-//                 : req.query.isAvailable === 'false'
-//                     ? false
-//                     : undefined
-//             : undefined
-
-
-//         const { page: p, limit: l, skip, sortBy: sb, sortOrder: so } =
-//             paginationSortingHelper(req.query);
-
-//         const result = await MedicineService.getAllMedicines(
-//             {search: searchString, isAvailable}
-//         )
-
-//         res.status(200).json(result);
-//     } catch (e) {
-//         res.status(400).json({
-//             success: false,
-//             message: "Failed to fetch medicines",
-//             details: e instanceof Error ? e.message : e
-//         });
-//     }
-// };
-
-
-
-// const getAllPost = async (req: Request, res: Response) => {
-//     try {
-//         const { search } = req.query
-//         const searchString = typeof search === 'string' ? search : undefined
-
-//         const tags = req.query.tags ? (req.query.tags as string).split(",") : [];
-
-
-//         // true or false
-//         const isFeatured = req.query.isFeatured
-//             ? req.query.isFeatured === 'true'
-//                 ? true
-//                 : req.query.isFeatured === 'false'
-//                     ? false
-//                     : undefined
-//             : undefined
-
-//         const status = req.query.status as PostStatus | undefined
-
-//         const authorId = req.query.authorId as string | undefined
-
-//         const { page, limit, skip, sortBy, sortOrder } = paginationSortingHelper(req.query)
-
-//         const result = await postService.getAllPost({ search: searchString, tags, isFeatured, status, authorId, page, limit, skip, sortBy, sortOrder })
-//         res.status(200).json(result)
-//     } catch (e) {
-//         res.status(400).json({
-//             error: "Post creation failed",
-//             details: e
-//         })
-//     }
-// }
-
-// const getPostById = async (req: Request, res: Response) => {
-//     try {
-//         const { postId } = req.params;
-//         if (!postId) {
-//             throw new Error("Post Id is required!")
-//         }
-//         const result = await postService.getPostById(postId);
-//         res.status(200).json(result)
-//     } catch (e) {
-//         res.status(400).json({
-//             error: "Post creation failed",
-//             details: e
-//         })
-//     }
-// }
+const getMedicineById = async (req: Request, res: Response, next : NextFunction) => {
+    try {
+        const { id } = req.params as {id : string};
+        if (!id) {
+            throw new Error("Medicine Id is required!")
+        }
+        const result = await MedicineService.getMedicineById(id);
+        res.status(200).json(result)
+    } catch (e) {
+        
+        // next(e);
+    }
+}
 
 // const getMyPosts = async (req: Request, res: Response) => {
 //     try {
@@ -210,6 +142,7 @@ const getAllMedicines = async (req: Request, res: Response, next: NextFunction) 
 export const MedicineController = {
     createMedicine,
     getAllMedicines,
+    getMedicineById,
     // getAllPost,
     // getPostById,
     // getMyPosts,
