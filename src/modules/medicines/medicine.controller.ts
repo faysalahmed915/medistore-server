@@ -3,6 +3,9 @@ import { NextFunction, Request, Response } from "express";
 // import paginationSortingHelper from "../../helpers/paginationSortingHelper";
 import { MedicineService } from "./medicine.service";
 
+import paginationSortingHelper from "../../helpers/paginationSortingHelper";
+import { Medicine } from "../../generated/prisma/browser";
+
 const createMedicine = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const user = req.user;
@@ -18,16 +21,74 @@ const createMedicine = async (req: Request, res: Response, next: NextFunction) =
     }
 }
 
-const getAllMedicines = async (req: Request, res: Response) => {
+const getAllMedicines = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await MedicineService.getAllMedicines();
-        res.status(200).json(result); 
+        const { search } = req.query;
+        const searchString = typeof search === 'string' ? search : undefined;
+
+        // Boolean check (Keeping your ternary style)
+        const isAvailable = req.query.isAvailable ? req.query.isAvailable === 'true' ? true : req.query.isAvailable === 'false' ? false : undefined : undefined;
+
+        // ১. হেল্পার থেকে ভ্যালুগুলো নেওয়া হলো (p, l, sb, so)
+        const { page: p, limit: l, skip, sortBy: sb, sortOrder: so } =
+            paginationSortingHelper(req.query);
+
+        // ২. সার্ভিসে এখন সবগুলো প্যারামিটার পাঠানো হচ্ছে
+        const result = await MedicineService.getAllMedicines({
+            search: searchString,
+            isAvailable,
+            page: p,        // এখানে p পাস করতে হবে
+            limit: l,       // এখানে l পাস করতে হবে
+            skip: skip,
+            sortBy: sb,     // এখানে sb পাস করতে হবে
+            sortOrder: so   // এখানে so পাস করতে হবে
+        });
+
+        // ৩. প্রোপার রেসপন্স ফরম্যাট
+        res.status(200).json({
+            success: true,
+            message: "Medicines fetched successfully",
+            meta: result.pagination,
+            data: result.data
+        });
     } catch (e) {
-        res.status(400).json({
-            error: "Failed to fetch medicines",
-            details: e
-        })
-    }}
+        next(e);
+    }
+};
+
+// const getAllMedicines = async (req: Request, res: Response) => {
+//     try {
+//         const { search } = req.query;
+//          const searchString = typeof search === 'string' ? search : undefined;
+
+
+//          // true or false
+//         const isAvailable = req.query.isAvailable
+//             ? req.query.isAvailable === 'true'
+//                 ? true
+//                 : req.query.isAvailable === 'false'
+//                     ? false
+//                     : undefined
+//             : undefined
+
+
+//         const { page: p, limit: l, skip, sortBy: sb, sortOrder: so } =
+//             paginationSortingHelper(req.query);
+
+//         const result = await MedicineService.getAllMedicines(
+//             {search: searchString, isAvailable}
+//         )
+
+//         res.status(200).json(result);
+//     } catch (e) {
+//         res.status(400).json({
+//             success: false,
+//             message: "Failed to fetch medicines",
+//             details: e instanceof Error ? e.message : e
+//         });
+//     }
+// };
+
 
 
 // const getAllPost = async (req: Request, res: Response) => {
