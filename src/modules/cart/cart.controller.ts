@@ -27,7 +27,8 @@ const addToCart = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // পোস্টম্যান টেস্টের জন্য যদি ইউজার না থাকে তবে ম্যানুয়ালি আইডি দিন
         const user = (req as any).user;
-        const userId = user?.id || "bW85sBNwNlkRtWqfMg023Cc4pGUpwctP";
+        const userId = user?.id;
+        // const userId = user?.id || "bW85sBNwNlkRtWqfMg023Cc4pGUpwctP";
 
         console.log("UserID found:", userId);
 
@@ -57,8 +58,8 @@ const addToCart = async (req: Request, res: Response, next: NextFunction) => {
 
 const getMyCart = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        // const userId = (req as any).user.id || "bW85sBNwNlkRtWqfMg023Cc4pGUpwctP"; 
-        const userId = "bW85sBNwNlkRtWqfMg023Cc4pGUpwctP";
+        const userId = (req as any).user.id; 
+        // const userId = "bW85sBNwNlkRtWqfMg023Cc4pGUpwctP";
         console.log("Fetching cart for User:", userId);
 
         const result = await CartService.getMyCart(userId);

@@ -1,7 +1,8 @@
 import express, { Router } from 'express';
-import { UserRole } from '../../constants/role';
+// import { UserRole } from "../../generated/prisma/enums";
 import auth from '../../middlewares/auth';
 import { MedicineController } from './medicine.controller';
+import { UserRole } from '../../constants/role';
 
 const router = express.Router();
 
