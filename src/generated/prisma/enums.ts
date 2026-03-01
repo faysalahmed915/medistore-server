@@ -10,7 +10,6 @@
 */
 
 export const UserRole = {
-  USER: 'USER',
   CUSTOMER: 'CUSTOMER',
   SELLER: 'SELLER',
   ADMIN: 'ADMIN'

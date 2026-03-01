@@ -28,12 +28,11 @@ model User {
   phone  String?
   status UserStatus @default(ACTIVE)
 
-  medicines  Medicine[] @relation("SellerMedicines")
+  medicines Medicine[] @relation("SellerMedicines")
   // categories Category[] @relation("AddedCategories")
-  orders     Order[]
-  reviews    Review[]
-  cart       Cart[]
-
+  orders    Order[]
+  reviews   Review[]
+  cart      Cart[]
 
   @@unique([email])
   @@map("user")
@@ -179,7 +178,7 @@ model Review {
 // --- Cart Models ---
 model Cart {
   id        String     @id @default(uuid())
-  userId    String     @unique 
+  userId    String     @unique
   user      User       @relation(fields: [userId], references: [id])
   items     CartItem[]
   createdAt DateTime   @default(now())
@@ -196,27 +195,16 @@ model CartItem {
   medicine   Medicine @relation(fields: [medicineId], references: [id])
   quantity   Int      @default(1)
 
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([cartId, medicineId])
   @@map("cart_item")
 }
 
-
-
-
-
-
-
-
-
-
-
 // --- Enums ---
 
 enum UserRole {
-  USER
   CUSTOMER
   SELLER
   ADMIN
