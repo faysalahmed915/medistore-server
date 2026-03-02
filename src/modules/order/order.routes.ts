@@ -8,14 +8,14 @@ const router = express.Router();
 
 // কাস্টমার অর্ডার প্লেস করবে
 router.post(
-  "/",
+  "/orders",
   auth(UserRole.CUSTOMER),
   OrderController.createOrder
 );
 
 // ইউজারের নিজস্ব অর্ডার লিস্ট দেখার জন্য
 router.get(
-  "/my-orders",
+  "/orders/my-orders",
   auth(UserRole.CUSTOMER),
   OrderController.getMyOrders
 );

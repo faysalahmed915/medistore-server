@@ -4,7 +4,12 @@ import { OrderService } from "./order.service";
 const createOrder = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const userId = (req as any).user.id;
+
+    console.log("userId", userId);
+
     const { items, shippingAddress, paymentMethod } = req.body;
+
+    console.log("items", items, "shippingAddress", shippingAddress, "paymentMethod", paymentMethod);
 
     // ভ্যালিডেশন
     if (!items || !Array.isArray(items) || items.length === 0) {
@@ -16,6 +21,8 @@ const createOrder = async (req: Request, res: Response, next: NextFunction) => {
       shippingAddress,
       paymentMethod,
     });
+
+    console.log("create order :", result);
 
     res.status(201).json({
       success: true,
