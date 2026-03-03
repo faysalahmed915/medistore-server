@@ -37,6 +37,30 @@ const createOrder = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const getOrderById = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const userId = (req as any).user.id;
+
+    const result = await OrderService.getOrderById(id as string, userId);
+
+    if (!result) {
+      return res.status(404).json({ 
+        success: false, 
+        message: "Order not found or unauthorized" 
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+
 const getMyOrders = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const userId = (req as any).user.id;
@@ -53,5 +77,6 @@ const getMyOrders = async (req: Request, res: Response, next: NextFunction) => {
 
 export const OrderController = {
   createOrder,
+  getOrderById,
   getMyOrders,
 };

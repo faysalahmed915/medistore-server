@@ -46,7 +46,25 @@ const createOrder = async (userId: string, payload: any) => {
       calculatedTotal += medicine.price * item.quantity;
     }
 
-    // ৪. ফাইনাল অ্যামাউন্ট আপডেট
+
+    // --- ৪. কার্ট থেকে আইটেমগুলো রিমুভ করা (নতুন সংযোজন) ---
+    const userCart = await tx.cart.findUnique({
+      where: { userId },
+    });
+
+    if (userCart) {
+      await tx.cartItem.deleteMany({
+        where: {
+          cartId: userCart.id,
+          medicineId: {
+            in: items.map((i: any) => i.medicineId), // শুধুমাত্র কেনা আইটেমগুলো কার্ট থেকে মুছবে
+          },
+        },
+      });
+    }
+    // --------------------------------------------------
+
+    // ৫. ফাইনাল অ্যামাউন্ট আপডেট
     return await tx.order.update({
       where: { id: order.id },
       data: { totalAmount: calculatedTotal },
@@ -54,6 +72,25 @@ const createOrder = async (userId: string, payload: any) => {
     });
   });
 };
+
+
+const getOrderById = async (orderId: string, userId: string) => {
+  return await prisma.order.findUnique({
+    where: {
+      id: orderId,
+      userId: userId, // সিকিউরিটি চেক: অর্ডারটি অবশ্যই ওই ইউজারের হতে হবে
+    },
+    include: {
+      items: {
+        include: {
+          medicine: true, // অর্ডারের ভেতরের ওষুধের নাম ও দাম দেখানোর জন্য
+        },
+      },
+    },
+  });
+};
+
+
 
 const getMyOrders = async (userId: string) => {
   return await prisma.order.findMany({
@@ -69,5 +106,6 @@ const getMyOrders = async (userId: string) => {
 
 export const OrderService = {
   createOrder,
+  getOrderById,
   getMyOrders,
 };

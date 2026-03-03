@@ -13,6 +13,13 @@ router.post(
   OrderController.createOrder
 );
 
+router.get(
+  "/orders/:id", // ডাইনামিক আইডি রাউট
+  auth(UserRole.CUSTOMER, UserRole.ADMIN), // কাস্টমার এবং এডমিন উভয়ই দেখতে পারবে
+  OrderController.getOrderById
+);
+
+
 // ইউজারের নিজস্ব অর্ডার লিস্ট দেখার জন্য
 router.get(
   "/orders/my-orders",
